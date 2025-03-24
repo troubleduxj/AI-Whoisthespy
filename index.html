@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模型A与模型B对话</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="container">
+    <!-- 左侧配置区域 -->
+    <div id="left-side">
+        <div class="tabs">
+            <button data-tab="deepseekConfig">DeepSeek 配置</button>
+            <button data-tab="qwenConfig">通义千问配置</button>
+            <button data-tab="doubaoConfig">豆包配置</button>
+            <button data-tab="discussionTab">讨论主题</button>
+        </div>
+        
+        <!-- 配置内容 -->
+        <!-- DeepSeek 配置区域 -->
+        <div id="deepseekConfig" class="tab-content">
+            <h3>模型A配置</h3>
+            <div class="config-group">
+                <label class="enable-switch">
+                    <input type="checkbox" id="deepseekEnabled" checked>
+                    <span class="switch-label">启用模型</span>
+                </label>
+            </div>
+            <div class="config-group">
+                <label for="deepseekColor">对话框颜色：</label>
+                <input type="color" id="deepseekColor" value="#007AFF"/>
+            </div>
+            <div class="config-group">
+                <label for="deepseekBaseUrl">Base URL:</label>
+                <input type="text" id="deepseekBaseUrl" placeholder="https://api.deepseek.com/v1" value="https://api.deepseek.com/v1"/>
+            </div>
+            <div class="config-group">
+                <label for="deepseekApiKey">API Key:</label>
+                <input type="text" placeholder="sk-..." id="deepseekApiKey"/>
+            </div>
+            <div class="config-group">
+                <label for="deepseekModel">Model:</label>
+                <select id="deepseekModel">
+                    <option value="deepseek-chat">deepseek-chat</option>
+                    <option value="deepseek-coder">deepseek-coder</option>
+                </select>
+            </div>
+            <div class="config-group">
+                <label for="deepseekPrompt">System Prompt:</label>
+                <textarea placeholder="System Prompt" id="deepseekPrompt"></textarea>
+            </div>
+            <div class="button-group">
+                <button onclick="validateDeepseekAPI()" class="validate-btn">验证连接</button>
+                <button onclick="saveDeepseekConfig()" class="save-btn">保存配置</button>
+            </div>
+            <div id="deepseekStatus" class="status-message"></div>
+        </div>
+        <!-- Qwen 配置区域 -->
+        <div id="qwenConfig" class="tab-content">
+            <h3>模型B配置</h3>
+            <div class="config-group">
+                <label class="enable-switch">
+                    <input type="checkbox" id="qwenEnabled" checked>
+                    <span class="switch-label">启用模型</span>
+                </label>
+            </div>
+            <div class="config-group">
+                <label for="qwenColor">对话框颜色：</label>
+                <input type="color" id="qwenColor" value="#34C759"/>
+            </div>
+            <div class="config-group">
+                <label for="qwenBaseUrl">Base URL:</label>
+                <input type="text" id="qwenBaseUrl" placeholder="https://dashscope.aliyuncs.com/api/v1" value="https://dashscope.aliyuncs.com/api/v1"/>
+            </div>
+            <div class="config-group">
+                <label for="qwenApiKey">API Key:</label>
+                <input type="text" placeholder="sk-..." id="qwenApiKey"/>
+            </div>
+            <div class="config-group">
+                <label for="qwenModel">Model:</label>
+                <select id="qwenModel">
+                    <option value="qwen-turbo">Qwen-Turbo</option>
+                    <option value="qwen-plus">Qwen-Plus</option>
+                    <option value="qwen-max">Qwen-Max</option>
+                </select>
+            </div>
+            <div class="config-group">
+                <label for="qwenPrompt">System Prompt:</label>
+                <textarea placeholder="System Prompt" id="qwenPrompt"></textarea>
+            </div>
+            <div class="button-group">
+                <button onclick="validateQwenAPI()" class="validate-btn">验证连接</button>
+                <button onclick="saveQwenConfig()" class="save-btn">保存配置</button>
+            </div>
+            <div id="qwenStatus" class="status-message"></div>
+        </div>
+        <!-- Doubao 配置区域 -->
+        <div id="doubaoConfig" class="tab-content">
+            <h3>模型C配置</h3>
+            <div class="config-group">
+                <label class="enable-switch">
+                    <input type="checkbox" id="doubaoEnabled" checked>
+                    <span class="switch-label">启用模型</span>
+                </label>
+            </div>
+            <div class="config-group">
+                <label for="doubaoColor">对话框颜色：</label>
+                <input type="color" id="doubaoColor" value="#5856D6"/>
+            </div>
+            <div class="config-group">
+                <label for="doubaoBaseUrl">Base URL:</label>
+                <input type="text" id="doubaoBaseUrl" placeholder="https://ark.cn-beijing.volces.com/api/v3" value="https://ark.cn-beijing.volces.com/api/v3"/>
+            </div>
+            <div class="config-group">
+                <label for="doubaoApiKey">API Key:</label>
+                <input type="text" placeholder="..." id="doubaoApiKey"/>
+            </div>
+            <div class="config-group">
+                <label for="doubaoModel">Model:</label>
+                <select id="doubaoModel">
+                    <option value="doubao-pro-32k-241215">豆包 Pro 32k</option>
+                </select>
+            </div>
+            <div class="config-group">
+                <label for="doubaoPrompt">System Prompt:</label>
+                <textarea placeholder="System Prompt" id="doubaoPrompt"></textarea>
+            </div>
+            <div class="button-group">
+                <button onclick="validateDoubaoAPI()" class="validate-btn">验证连接</button>
+                <button onclick="saveDoubaoConfig()" class="save-btn">保存配置</button>
+            </div>
+            <div id="doubaoStatus" class="status-message"></div>
+        </div>
+        <!-- 修改讨论主题标签页，确保结构正确 -->
+        <div id="discussionTab" class="tab-content">
+            <div class="topic-input-area">
+                <input type="text" id="discussionTopic" placeholder="请输入讨论主题" value="现阶段，哪个AI大模型更聪明">
+                <div class="button-group">
+                    <button class="start-discussion-btn" onclick="startDiscussion()">开始讨论</button>
+                    <button class="stop-discussion-btn" onclick="stopDiscussion()" disabled>停止讨论</button>
+                    <button class="save-chat-btn" onclick="saveChat()">保存对话</button>
+                    <button class="clear-chat-btn" onclick="clearChat()">清除对话</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右侧对话区域 -->
+    <div id="right-side">
+        <h2>对话记录</h2>
+        <div id="conversationLog"></div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

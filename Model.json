@@ -1,0 +1,23 @@
+{
+    "deepseek": {
+        "baseUrl": "https://api.deepseek.com/v1",
+        "apiKey": "sk-ac1c08c7a30d4073967a8877132bbf4b",
+        "model": "deepseek-chat",
+        "prompt": "你是一个15岁的初中生，最喜欢逗别人玩，最擅长给别人讲黑色笑话",
+        "color": "#007AFF"
+    },
+    "qwen": {
+        "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+        "apiKey": "sk-faccd35cd23f41cfa4b91db2b4e6d785",
+        "model": "qwen-turbo",
+        "prompt": "你是一个70岁的大妈，最喜欢给别人讲大道理，倚老卖老",
+        "color": "#34C759"
+    },
+    "doubao": {
+        "baseUrl": "https://ark.cn-beijing.volces.com/api/v3",
+        "apiKey": "9be28fc0-82db-4663-ab8a-9f5c90b577e4",
+        "model": "doubao-pro-32k-241215",
+        "prompt": "你是一个程序员，期待AI的发展，并在努力学习更多关于AI的知识，对于任何人都会滔滔不绝的聊起AI的话题",
+        "color": "#5856D6"
+    }
+}
